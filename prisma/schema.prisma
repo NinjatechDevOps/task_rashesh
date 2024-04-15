@@ -1,0 +1,49 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "mysql"
+    url      = env("DATABASE_URL")
+}
+
+model Post {
+  id        Int      @id @default(autoincrement())
+  title     String
+  content   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model User {
+  id                Int      @id @default(autoincrement())
+  name              String
+  email             String   @unique
+  password          String
+  isVerified        Boolean  @default(false)
+  verificationToken String? 
+  tokenExpiration   DateTime?
+  categories        Json?    // JSON field to store category IDs
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  userCategories    UserCategory[] // Back-reference to UserCategory
+}
+
+model Category {
+  id              Int            @id @default(autoincrement())
+  name            String
+  userCategories  UserCategory[] // Back-reference to UserCategory
+}
+
+
+model UserCategory {
+  userId    Int
+  categoryId Int
+  user      User   @relation(fields: [userId], references: [id])
+  category  Category @relation(fields: [categoryId], references: [id])
+
+  @@id([userId, categoryId])
+}
