@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 
 const page = () => {
     const [customData, setCustomdata] = useState<any[]>()
+    const userId: number = +(localStorage.getItem('userId') || 0)
 
     const { mutate: addFavorite } = api.favorites.addFavorite.useMutation();
     const { mutate: removeFavorite } = api.favorites.removeFavorite.useMutation();
@@ -18,8 +19,8 @@ const page = () => {
         }
     });
     useEffect(() => {
-        store.mutate()
-        getList.mutate({ userId: 2 });
+        store()
+        getList.mutate({ userId: userId });
     }, []);
 
 
@@ -27,9 +28,9 @@ const page = () => {
         const isSelected = customData?.find(cat => cat.id === categoryId)?.isSelected;
 
         if (isSelected) {
-            removeFavorite({ userId: 2, categoryId });
+            removeFavorite({ userId: userId, categoryId });
         } else {
-            addFavorite({ userId: 2, categoryId });
+            addFavorite({ userId: userId, categoryId });
         }
 
         setCustomdata(customData?.map(cat => {
@@ -41,7 +42,6 @@ const page = () => {
 
     return (
         < >
-            {/* <div className=" px-5 mt-10 py-5 main-section   "> */}
             <div className=" mt-10 py-5 main-section   max-w-full flex justify-center items-center ">
                 <div className=" px-5 customshadow rounded-xl shadow-xl font-sans    flex flex-col justify-center">
                     <div className="">

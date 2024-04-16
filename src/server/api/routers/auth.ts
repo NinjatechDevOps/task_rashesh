@@ -11,6 +11,7 @@ const loginInput = z.object({
 const loginOutput = z.object({
     userId: z.number(),
     isVerified: z.boolean(),
+    name: z.string()
 });
 
 export const authRouter = createTRPCRouter({
@@ -49,7 +50,7 @@ export const authRouter = createTRPCRouter({
             });
 
             const mailOptions = {
-                from: 'mail',
+                from: 'madhakuday@gmail.com',
                 to: input.email,
                 subject: 'Welcome to Our App - Verify Your Email',
                 html: `Hi ${input.name},\nYour OTP to complete your registration is: ${verificationToken}`
@@ -107,6 +108,7 @@ export const authRouter = createTRPCRouter({
             return {
                 userId: user.id,
                 isVerified: user.isVerified,
+                name: user.name
             };
         }),
 

@@ -21,7 +21,7 @@ const page = () => {
             console.log('Done', data);
             router.push('/verfymail?email=' + inputdata.email)
         },
-        onError: (error) => {
+        onError: (error: any) => {
             console.log('Error', error);
         }
     });

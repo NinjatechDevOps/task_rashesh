@@ -57,7 +57,7 @@ const page = () => {
                                     onChange={(e) => setOtp(e.target.value)}
                                     type="text"
                                     value={otp}
-                                    className="w-8 h-8 border-2 border-gray-400 rounded-md "
+                                    className="w-full h-8 border-2 border-gray-400 rounded-md "
                                 />
                                 {/* <input
                   maxLength="1"

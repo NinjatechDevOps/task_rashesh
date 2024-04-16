@@ -38,12 +38,12 @@ export const catRouter = createTRPCRouter({
             const categories = await ctx.db.category.findMany();
             const user = await ctx.db.user.findUnique({
                 where: { id: input.userId },
-                select: { categories: true }
+                select: { categories: true, id: true }
             });
 
-            const categoriesWithSelection = categories.map(category => ({
+            const categoriesWithSelection = categories.map((category: any) => ({
                 ...category,
-                isSelected: user?.categories?.includes(category.id) && user?.id === input.userId,
+                isSelected: user?.categories?.includes(category.id) && user?.id == input.userId,
             }));
 
             return categoriesWithSelection;

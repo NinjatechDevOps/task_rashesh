@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -8,6 +9,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 const Header = () => {
+
   return (
     <>
       <div className=" bg-white shadow-lg">
@@ -17,7 +19,6 @@ const Header = () => {
               <ul className="flex space-x-6">
                 <li>Help</li>
                 <li>order & returns</li>
-                <li>Hi John</li>
               </ul>
             </div>
           </div>
